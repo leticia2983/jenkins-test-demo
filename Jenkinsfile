@@ -2,21 +2,23 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vastevenson/pytest-intro-vs.git']]])
+               checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/leticia2983/pytest-intro-vs.git']])
             }
         }
         stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/vastevenson/pytest-intro-vs.git'
-                sh 'python3 ops.py'
+               git branch: 'main', url: 'https://github.com/leticia2983/pytest-intro-vs.git'
+               sh 'python3 ops.py'
             }
         }
         stage('Test') {
             steps {
-                sh 'python3 -m pytest'
+
+               sh 'python3 -m pytest'
             }
         }
     }
+
 }
